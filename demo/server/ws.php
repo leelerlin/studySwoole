@@ -40,7 +40,7 @@ class Ws {
         if($request->fd == 1) {
             // 每2秒执行
             swoole_timer_tick(2000, function($timer_id){
-                echo "2s: timerId:{$timer_id}\n";
+                //echo "2s: timerId:{$timer_id}\n";
             });
         }
     }
@@ -51,8 +51,9 @@ class Ws {
      * @param $frame
      */
     public function onMessage($ws, $frame) {
-        echo "ser-push-message:{$frame->data}\n";
-        // todo 10s
+        echo "'server:'onmessage:{$frame->data}\n";
+
+        // 耗时场景 20s
         $data = [
             'task' => 1,
             'fd' => $frame->fd,
@@ -63,20 +64,20 @@ class Ws {
             echo "5s-after\n";
             $ws->push($frame->fd, "server-time-after:");
         });
-        $ws->push($frame->fd, "server-push:".date("Y-m-d H:i:s"));
+        $ws->push($frame->fd, "wsserver-date:".date("Y-m-d H:i:s"));
     }
 
     /**
-     * @param $serv
-     * @param $taskId
-     * @param $workerId
+     * @param $serv socket对象
+     * @param $taskId 任务ID
+     * @param $workerId worker进程
      * @param $data
      */
     public function onTask($serv, $taskId, $workerId, $data) {
         print_r($data);
-        // 耗时场景 10s
-        sleep(10);
-        return "on task finish"; // 告诉worker
+        // 耗时场景 20s
+        sleep(20);
+        return 'taksId='.$taskId.'_wokrderId='. $workerId.' on task finish'; // 告诉worker,onfinish会接受这个值
     }
 
     /**
