@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: baidu
- * Date: 18/2/28
- * Time: 上午1:39
- */
+
 $http = new Swoole\Http\Server("0.0.0.0", 8811);
 
 $http->set(

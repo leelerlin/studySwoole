@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: baidu
- * Date: 18/3/1
- * Time: 下午11:45
- */
 
 $server = new Swoole\WebSocket\Server("0.0.0.0", 8812);
 //$server->set([]);

@@ -1,10 +1,4 @@
 <?php
-/**
- * ws 优化 基础类库
- * User: singwa
- * Date: 18/3/2
- * Time: 上午12:34
- */
 
 class Ws {
 
