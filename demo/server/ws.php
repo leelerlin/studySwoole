@@ -38,7 +38,7 @@ class Ws {
     public function onOpen($ws, $request) {
         var_dump($request->fd);
         if($request->fd == 1) {
-            // 每2秒执行
+            // 每2秒执行- 定时器
             swoole_timer_tick(2000, function($timer_id){
                 //echo "2s: timerId:{$timer_id}\n";
             });
@@ -60,6 +60,7 @@ class Ws {
         ];
         $ws->task($data);
 
+        // 5秒后执行-延时
         swoole_timer_after(5000, function() use($ws, $frame) {
             echo "5s-after\n";
             $ws->push($frame->fd, "server-time-after:");
